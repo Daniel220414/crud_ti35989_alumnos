@@ -14,4 +14,10 @@
 Route::get('/', function () {
     return view('welcome');
 });
+Route::get('/hola', function () {
+    return 'Que onda perro';
+});
+Route::get('/alumnos', function () {
+    return view('com');
+});
 //Hola
