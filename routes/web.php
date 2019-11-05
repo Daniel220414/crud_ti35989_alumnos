@@ -14,10 +14,13 @@
 Route::get('/', function () {
     return view('welcome');
 });
-Route::get('/hola', function () {
+/*Route::get('/hola', function () {
     return 'Que onda perro';
 });
 Route::get('/alumnos', function () {
-    return view('com');
-});
+    return view('plantilla');
+}); */
+
+Route::resource('/bancos','bancosController');
+
 //Hola
