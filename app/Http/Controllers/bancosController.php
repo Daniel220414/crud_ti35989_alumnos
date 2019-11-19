@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\bancosModel;
 
 class bancosController extends Controller
 {
@@ -13,7 +14,8 @@ class bancosController extends Controller
      */
     public function index()
     {
-        return view("bancos");
+        $bancos = bancosModel::all();
+        return view("bancos", compact("bancos"));
     }
 
     /**
@@ -34,7 +36,13 @@ class bancosController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $bancos = new bancosModel();//creando objeto de tipo bancos
+        //Campo de B.D  = Nombre del campo del formulario
+        $bancos -> nombre = $request->nombre;
+        $bancos -> telefono = $request->telefono;
+        $bancos -> codigo = $request->sucursal;
+        $bancos -> save();
+        return redirect("bancos")->with("success","Banco almacenado correctamente");
     }
 
     /**
