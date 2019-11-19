@@ -36,6 +36,9 @@ class bancosController extends Controller
      */
     public function store(Request $request)
     {
+        if(bancosModel::where("nombre",$request->nombre)->where("codigo",$request->sucursal)->exists()){
+            return redirect("bancos")->with("error","Ya existe la sucursal ".$request->sucursal." para el banco ".$request->nombre);
+        }else{
         $bancos = new bancosModel();//creando objeto de tipo bancos
         //Campo de B.D  = Nombre del campo del formulario
         $bancos -> nombre = $request->nombre;
@@ -43,6 +46,8 @@ class bancosController extends Controller
         $bancos -> codigo = $request->sucursal;
         $bancos -> save();
         return redirect("bancos")->with("success","Banco almacenado correctamente");
+        }
+       
     }
 
     /**

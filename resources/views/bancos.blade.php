@@ -51,10 +51,17 @@
 <div class="row">
     <div class="col-md-6">
         @if(session()->has('success'))
-        <div class="alert-success">
+        <div class="alert alert-success">
+            <i class="fa fa-check" aria-hidden="true"></i>
             {{session()->get('success')}}
         </div>
         @endif
+        @if(session()->has('error'))
+        <div class="alert alert-danger">
+            <i class="fa fa-window-close" aria-hidden="true"></i>
+            {{session()->get('error')}}
+        </div>
+        @endif        
     </div>
 </div>
 
