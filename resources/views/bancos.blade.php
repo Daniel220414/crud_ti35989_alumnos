@@ -3,7 +3,7 @@
 @extends ("plantilla")
 @section ("modulo")Bancos @endsection
 @section ("contenido")
-<form action="{{url('bancos')}}" method="POST">
+<form action="{{url("bancos")}}" method="POST">
     {{csrf_field()}}
     <div class="row">
         <div class="col-md-3">
@@ -11,7 +11,7 @@
                 <div class="input-group-prepend">
                   <span class="input-group-text" id="basic-addon1"><i class="fa fa-user-o" aria-hidden="true"></i></span>
                 </div>
-                <input type="text" class="form-control" placeholder="Username" id="nombre" name="nombre" aria-label="Username" aria-describedby="basic-addon1">
+                <input required maxlength="25" type="text" class="form-control" placeholder="Username" id="nombre" name="nombre" aria-label="Username" aria-describedby="basic-addon1">
             </div>
         </div>
      </div>
@@ -22,7 +22,7 @@
                 <div class="input-group-prepend">
                   <span class="input-group-text" id="basic-addon1"><i class="fa fa-mobile" aria-hidden="true"></i></span>
                 </div>
-                <input type="text" class="form-control"  id="telefono" name="telefono" placeholder="Cellphone" aria-label="Cellphone" aria-describedby="basic-addon1">
+                <input required maxlength="10" type="text" class="form-control"  id="telefono" name="telefono" placeholder="Cellphone" aria-label="Cellphone" aria-describedby="basic-addon1">
             </div>
         </div>
     </div>
@@ -32,7 +32,7 @@
                 <div class="input-group-prepend">
                   <span class="input-group-text" id="basic-addon1"><i class="fa fa-unlock" aria-hidden="true"></i></span>
                 </div>
-                <input type="text" class="form-control" id="sucursar" name="sucursal" placeholder="Sucursal" aria-label="Sucursal" aria-describedby="basic-addon1">
+                <input required maxlength="10" type="text" class="form-control" id="sucursar" name="sucursal" placeholder="Sucursal" aria-label="Sucursal" aria-describedby="basic-addon1">
             </div>
         </div>
     </div>
@@ -81,8 +81,20 @@
                     <tbody>
                         @foreach ($bancos as $row)
                         <tr><td>{{$row->nombre}}</td><td>{{$row->telefono}}</td><td>{{$row->codigo}}</td>
-                            <td><button class="btn-success"><i class="fa fa-pencil" aria-hidden="true"></i></button></td>
-                            <td><button class="btn-danger"><i class="fa fa-trash-o" aria-hidden="true"></i></button></td>
+                            <td>
+                                <a class="btn btn-warning" href="{{url("bancos/".$row->id."/edit")}}" >
+                                    <i class="fa fa-pencil" aria-hidden="true"></i>
+                                </a>
+                            </td>
+                            <td>
+                                <form method="POST" action="{{route("bancos.destroy",$row->id)}}">
+                                    @method('DELETE')
+                                    {{csrf_field()}}
+                                    <button  type="submit" class=" btn btn-danger">
+                                    <i class="fa fa-trash-o" aria-hidden="true"></i>
+                                </button>
+                                </form>
+                            </td>
                         </tr>
                         @endforeach
                     </tbody>

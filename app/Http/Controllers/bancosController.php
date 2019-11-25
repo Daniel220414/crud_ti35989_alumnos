@@ -69,7 +69,12 @@ class bancosController extends Controller
      */
     public function edit($id)
     {
-        //
+        if(bancosModel::where("id",$id)->exists()){
+         $bancos = bancosModel::select("*")->where("id",$id)->get();
+        return view("editaBanco",compact("bancos"));
+         }else{
+            return redirect("bancos")->with("error","El banco no existe");
+        }
     }
 
     /**
@@ -81,7 +86,17 @@ class bancosController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        if(bancosModel::where("id",$id)->exists()){
+            $bancos = bancosModel::find($id);        
+            $bancos -> nombre = $request->nombre;
+            $bancos -> telefono = $request->telefono;
+            $bancos -> codigo = $request->sucursal;
+            $bancos -> save();
+            return redirect("bancos")->with("success","Banco actualizado correctamente");
+        }else{
+            return redirect("bancos")->with("error","El banco no existe");
+        }
+        
     }
 
     /**
@@ -92,6 +107,12 @@ class bancosController extends Controller
      */
     public function destroy($id)
     {
-        //
+        if(bancosModel::where("id",$id)->exists()){
+       $bancos = bancosModel::find($id);
+       $bancos->delete();
+       return redirect("bancos")->with("success","Banco eliminado correctamente");
+       }else{
+            return redirect("bancos")->with("error","El banco no existe");
+        }
     }
 }
