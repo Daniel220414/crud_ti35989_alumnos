@@ -11,9 +11,8 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+
+
 /*Route::get('/hola', function () {
     return 'Que onda perro';
 });
@@ -21,6 +20,13 @@ Route::get('/alumnos', function () {
     return view('plantilla');
 }); */
 
-Route::resource('/bancos','bancosController');
+Route::resource('/bancos','bancosController')->middleware('auth');
 
 //Hola
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home')->middleware('auth');
+
+Route::get('/', function () {
+    return view('welcome');
+})->middleware('auth');

@@ -10,7 +10,7 @@
                 <div class="input-group-prepend">
                   <span class="input-group-text" id="basic-addon1"><i class="fa fa-user-o" aria-hidden="true"></i></span>
                 </div>
-                <input required maxlength="25" value="{{$bancos[0]->nombre}}" type="text" class="form-control" placeholder="Username" id="nombre" name="nombre" aria-label="Username" aria-describedby="basic-addon1">
+                <input required maxlength="25" value="{{$bancos[0]->nombre}}" type="text" class="form-control" placeholder="BancoName" id="nombre" name="nombre" aria-label="Username" aria-describedby="basic-addon1">
             </div>
         </div>
      </div>
